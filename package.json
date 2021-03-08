@@ -1,0 +1,29 @@
+{
+  "name": "joker",
+  "version": "1.0.0",
+  "description": "Render random jokes to a user based on the category that the user chooses",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bondeveloper/joker.git"
+  },
+  "author": "bondeveloper",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bondeveloper/joker/issues"
+  },
+  "homepage": "https://github.com/bondeveloper/joker#readme",
+  "dependencies": {
+    "apollo-datasource-rest": "^0.10.0",
+    "apollo-server": "^2.21.0",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
