@@ -1,29 +1,16 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
+import { useGetCategories } from '../../../hooks/categories/useGetCategories';
 import CategoriesList from './categories-list/categories-list';
 
 const Home: React.FC = () => {
-    const categories: string[] = [
-        'animal',
-        'career',
-        'celebrity',
-        'dev',
-        'explicit',
-        'fashion',
-        'food',
-        'history',
-        'money',
-        'movie',
-        'music',
-        'political',
-        'religion',
-        'science',
-        'sport',
-        'travel'
-    ]
+    // I should remember to try and move this to the redux store to highlight redux knowledge
+    const categories = useGetCategories(); 
     return (
         <div>
-            <CategoriesList categories={categories}/>
+            <CategoriesList categories={categories || []}/>
+            <Button variant='primary'>random joke</Button>
         </div>
     )
 };

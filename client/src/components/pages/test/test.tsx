@@ -1,8 +1,12 @@
 import React from 'react';
 
+import Alert from 'react-bootstrap/Alert';
+
 const Test: React.FC = () => {
     return (
-        <h1>Test page that routing works</h1>
+        <Alert variant='danger'>
+            Hi! This is a dummy page that was created to test routing
+        </Alert>
     )
 };
 

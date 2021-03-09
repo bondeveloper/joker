@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 interface CategoryListProps {
     categories: string[]
 }
 
+
 const CategoriesList: React.FC< CategoryListProps > = ( { categories }: CategoryListProps ) => {
+    const [ category, setCategory ] = useState('');
+
+    const onChangedHandler = ( e: React.ChangeEvent<HTMLSelectElement> ): void => setCategory(e.currentTarget.value);
+    
     return (
         <div>
-            { categories.map( cat => (
-                <option key={cat}> {cat}</option>
-            ))}
+            <select onChange={onChangedHandler}>
+                <option value=''>select category</option>
+                { categories.map( cat => (
+                    <option key={cat} value={cat}> {cat}</option>
+                ))}
+            </select>
         </div>
     )
 };
