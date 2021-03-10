@@ -1,7 +1,4 @@
 import { CategoryActionTypes } from '../types/actions';
-import { SET_CATEGORY_LIST } from '../types/actions';
-import { gql, useQuery } from '@apollo/client';
-import { useGetCategoryList } from '../hooks/categories/useGetCategories';
 
 
 const initState = {

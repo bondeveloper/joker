@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import { connect } from 'react-redux';
@@ -33,7 +33,6 @@ type Props = HomePageProps & LinkStateProps & LinkDispatchProps;
 const Home: React.FC<Props> = ( { 
     selectedCategory,
     }) => {
-
 
     const categories = useGetCategoryList();
 
@@ -107,7 +106,6 @@ interface LinkDispatchProps {
 }
 
 const mapStateToProps = ( state: AppState, ownProps: HomePageProps ): LinkStateProps => {
-    console.log(state);
     return {
         selectedCategory: state.category.selected,
         joke: state.joke
