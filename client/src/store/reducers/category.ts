@@ -1,17 +1,16 @@
 import { CategoryActionTypes } from '../types/actions';
 import { SET_CATEGORY_LIST } from '../types/actions';
-// const initState = {
-//     selected: 'dev',
-//     list: []
-// };
-
-const initState: string[] = []
+import { gql, useQuery } from '@apollo/client';
+import { useGetCategoryList } from '../hooks/categories/useGetCategories';
 
 
-const reducer = ( state = initState, action: CategoryActionTypes ) : string[] => {
+const initState = {
+    selected: ''
+};
+
+
+const reducer = ( state = initState, action: CategoryActionTypes ) : typeof initState => {
     switch ( action.type ) {
-        case SET_CATEGORY_LIST:
-            return action.list
         default:
             return state;
     };

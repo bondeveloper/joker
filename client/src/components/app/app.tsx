@@ -22,10 +22,13 @@ const App: React.FC = () => {
             <Provider store={store}>
                 <Router>
                     <Header />
-                    <Switch>
-                        <Route path='/test'><Test /></Route>
-                        <Route path='/'><Home /></Route>
-                    </Switch>
+                    <main>
+                        <Switch>
+                            <Route path='/test'><Test /></Route>
+                            <Route path='/'><Home /></Route>
+                        </Switch>
+                    </main>
+                    
                 </Router>
             </Provider>
        </ApolloProvider>

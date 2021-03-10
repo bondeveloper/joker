@@ -1,6 +1,6 @@
 import { Action, Dispatch } from 'redux';
 
-import { GET_JOKE_SUCCESS } from '../types/actions';
+import { SET_JOKE } from '../types/actions';
 import { JokeActionTypes } from '../types/actions';
 import { Joke } from '../types/joke';
 
@@ -11,7 +11,7 @@ const initState: Joke = {
 
 const jokeReducer = ( state = initState, action: JokeActionTypes ): Joke => {
     switch ( action.type ) {
-        case GET_JOKE_SUCCESS:
+        case SET_JOKE:
             return action.joke
         default:
             return state;

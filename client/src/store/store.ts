@@ -6,8 +6,8 @@ import { jokeReducer } from './reducers/joke';
 import { AppActions } from './types/actions';
 
 const rootReducer = combineReducers({
-    categories: categoryReducer,
-    jokes: jokeReducer
+    category: categoryReducer,
+    joke: jokeReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>

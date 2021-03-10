@@ -1,60 +1,104 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { StringLiteralLike } from 'typescript';
+import { NetworkStatus } from '@apollo/client';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Spinner from 'react-bootstrap/Spinner';
 
-
-import { getCategoryList } from '../../../store/actions/categories';
-import { useGetJoke } from '../../../store/hooks/jokes/useGetJoke';
-import CategoriesList from './categories-list/categories-list';
-
+import CategoriesList from './category/list';
 
 import { getJoke } from '../../../store/actions/jokes';
 import { Joke } from '../../../store/types/joke';
 import { AppState } from '../../../store/store';
 import { ThunkDispatch } from 'redux-thunk';
 import { AppActions } from '../../../store/types/actions';
+
+import { getCategoryList } from '../../../store/actions/categories';
 import { useGetCategoryList } from '../../../store/hooks/categories/useGetCategories';
+import { useGetJoke } from '../../../store/hooks/jokes/useGetJoke';
 
 
+import './home.css';
 
-interface HomePageProps {
-    category?: string,
-    list?: string[]
-}
+interface HomePageProps {}
 
-interface HomePageState {}
 
 type Props = HomePageProps & LinkStateProps & LinkDispatchProps;
 
-export class Home extends React.Component<Props, HomePageState> {
+const Home: React.FC<Props> = ( { 
+    selectedCategory,
+    }) => {
 
-    componentDidMount() {
-        //const categories = useGetCategoryList();
-        this.props.startGetCategoryList();
+
+    const categories = useGetCategoryList();
+
+    const [ ct, setCt ] = useState( selectedCategory ); 
+
+    const { loading, error, data, refetch, networkStatus } = useGetJoke(ct);
+
+    let spinner, joke = null;
+
+    if ( ( networkStatus === NetworkStatus.refetch ) || loading || error ) {
+        spinner = ( ( networkStatus === NetworkStatus.refetch ) || loading )
+                    ? <Spinner animation='grow' variant='info' /> 
+                    : null;
+    } else {
+        joke = data?.joke;
     }
 
-    render() {
-        this.props.startGetCategoryList();
-        console.log(this.props);
-        return <h1> Home</h1>
+    const selectedCategoryHandler = ( dataFromChild: string )  => {
+        setCt( dataFromChild );
     }
-}
+
+    const display = joke ? (
+        <div>
+            <Jumbotron>
+                <p>
+                { joke ?.value }
+                </p>
+                <Button variant='link' href={joke?.url} target='_blank'> link to joke </Button>
+            </Jumbotron>
+            <Button variant='info' onClick={() => refetch()}> refetch! </Button>
+        </div>
+    ): spinner;
+
+
+    return (
+        <Container className='home'>
+            <Row className='justify-content-md-center'>
+                <Col xs lg={3}>
+                    <CategoriesList 
+                        categories={categories} 
+                        category={selectedCategory} 
+                        selectedCategoryHandler={selectedCategoryHandler}
+                    />
+                </Col>
+                <Col xs lg={6} className='display-joke'>                         
+                    { display }
+                </Col>
+            </Row> 
+        </Container>
+    )
+};
 
 interface LinkStateProps {
-    list: string[]
+    selectedCategory: string,
+    joke: Joke
 }
 interface LinkDispatchProps {
-    startGetJoke: ( category: string ) => void;
+    startGetJoke: ( selected: string ) => void;
     startGetCategoryList: () => void;
 }
 
 const mapStateToProps = ( state: AppState, ownProps: HomePageProps ): LinkStateProps => {
     console.log(state);
     return {
-        list: state.categories
+        selectedCategory: state.category.selected,
+        joke: state.joke
     }
 };
 

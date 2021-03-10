@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 
+import './list.css';
 
 interface CategoryListPageProps {
     categories: string[],
     category: string,
     selectedCategoryHandler: (arg: string) => void
 }
+
 const CategoriesList: React.FC< CategoryListPageProps > = ( { 
-    categories, category, selectedCategoryHandler 
+    categories,
+    category,
+    selectedCategoryHandler 
 }: CategoryListPageProps ) => {
 
     const onChangedHandler = ( e: React.ChangeEvent<HTMLSelectElement> ): void => {
@@ -15,12 +19,13 @@ const CategoriesList: React.FC< CategoryListPageProps > = ( {
     }
     
     return (
-        <div>
+        <div className='list'>
+            <label>Category</label>
             <select onChange={onChangedHandler}>
-                <option value={ category }>{ category ? category : 'select category' }</option>
-                { categories.map( ( cat: string ) => (
+                <option key='random' value=''>random</option>
+                { categories ? categories.map( ( cat: string ) => (
                     <option key={cat} value={cat}> {cat}</option>
-                ))}
+                )) : null}
             </select>
         </div>
     )

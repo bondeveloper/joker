@@ -1,11 +1,12 @@
 import { Joke } from './joke';
 
-export const GET_JOKE_SUCCESS = 'GET_JOKE_SUCCESS';
+export const SET_JOKE = 'SET_JOKE';
 export const SET_CATEGORY_LIST = 'SET_CATEGORY_LIST';
+export const SET_CATEGORY_SELECTED = 'SET_CATEGORY_SELECTED';
 
 
-export interface GetJokeAction {
-    type: typeof GET_JOKE_SUCCESS;
+export interface SetJokeAction {
+    type: typeof SET_JOKE;
     joke: Joke
 }
 
@@ -14,6 +15,11 @@ export interface SetCategoryListAction {
     list: string[]
 }
 
-export type JokeActionTypes = GetJokeAction
-export type CategoryActionTypes = SetCategoryListAction
+export interface SetCategorySelectedAction {
+    type: typeof SET_CATEGORY_SELECTED,
+    selected: string
+}
+
+export type JokeActionTypes = SetJokeAction
+export type CategoryActionTypes = SetCategoryListAction | SetCategorySelectedAction
 export type AppActions = JokeActionTypes | CategoryActionTypes

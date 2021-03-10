@@ -3,7 +3,7 @@ const { gql } = require('apollo-server');
 const typeDefs = gql`
     type Joke {
         url: String
-        value: String,
+        value: String!,
         categories: [ String ],
     },
 
