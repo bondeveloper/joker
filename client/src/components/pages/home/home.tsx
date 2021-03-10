@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
+import Figure from 'react-bootstrap/Figure';
 
 import CategoriesList from './category/list';
 
@@ -57,10 +58,21 @@ const Home: React.FC<Props> = ( {
     const display = joke ? (
         <div>
             <Jumbotron>
+                <div>
+                    <Button variant='link' href={ joke ?. url } target='_blank'>
+                        <Figure>
+                            <Figure.Image
+                                width={171}
+                                height={180}
+                                alt='Joke Image'
+                                src={ joke ?. icon_url }
+                            />
+                        </Figure>
+                    </Button>
+                </div>
                 <p>
                 { joke ?.value }
                 </p>
-                <Button variant='link' href={joke?.url} target='_blank'> link to joke </Button>
             </Jumbotron>
             <Button variant='info' onClick={() => refetch()}> refetch! </Button>
         </div>
@@ -70,14 +82,14 @@ const Home: React.FC<Props> = ( {
     return (
         <Container className='home'>
             <Row className='justify-content-md-center'>
-                <Col xs lg={3}>
+                <Col lg={3}>
                     <CategoriesList 
                         categories={categories} 
                         category={selectedCategory} 
                         selectedCategoryHandler={selectedCategoryHandler}
                     />
                 </Col>
-                <Col xs lg={6} className='display-joke'>                         
+                <Col lg={6} className='display-joke'>                         
                     { display }
                 </Col>
             </Row> 

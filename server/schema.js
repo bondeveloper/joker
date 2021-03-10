@@ -5,6 +5,7 @@ const typeDefs = gql`
         url: String
         value: String!,
         categories: [ String ],
+        icon_url: String
     },
 
     type Query {

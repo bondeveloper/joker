@@ -22,10 +22,11 @@ const CategoriesList: React.FC< CategoryListPageProps > = ( {
         <div className='list'>
             <label>Category</label>
             <select onChange={onChangedHandler}>
-                <option key='random' value=''>random</option>
+                
                 { categories ? categories.map( ( cat: string ) => (
                     <option key={cat} value={cat}> {cat}</option>
-                )) : null}
+                )) : <option key='random' value=''>random</option>}
+                
             </select>
         </div>
     )

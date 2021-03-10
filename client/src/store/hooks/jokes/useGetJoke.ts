@@ -4,14 +4,15 @@ const GET_JOKE = gql`
     query GetJoke( $category: String ) {
         joke( category: $category) {
             value,
-            url
+            url,
+            icon_url
         }
     }
 `;
 
 export const useGetJoke = ( category: string | null ): any => {
 
-    const filters = !category || category == '' || category == null || category == 'random' ? undefined : {
+    const filters = !category || category == '' || category == null ? undefined : {
         variables: { category },
         notifyOnNetworkStatusChange: true,
     }
