@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const { ApolloServer } = require('apollo-server-express');
-// const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./server/schema');
 const resolvers = require('./server/resolvers');
 const ChuckNorrisAPI = require('./server/datasource/chucknorris');

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { NetworkStatus } from '@apollo/client';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -11,14 +10,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Figure from 'react-bootstrap/Figure';
 
 import CategoriesList from './category/list';
-
-import { getJoke } from '../../../store/actions/jokes';
-import { Joke } from '../../../store/types/joke';
 import { AppState } from '../../../store/store';
-import { ThunkDispatch } from 'redux-thunk';
-import { AppActions } from '../../../store/types/actions';
-
-import { getCategoryList } from '../../../store/actions/categories';
 import { useGetCategoryList } from '../../../store/hooks/categories/useGetCategories';
 import { useGetJoke } from '../../../store/hooks/jokes/useGetJoke';
 
@@ -28,7 +20,7 @@ import './home.css';
 interface HomePageProps {}
 
 
-type Props = HomePageProps & LinkStateProps & LinkDispatchProps;
+type Props = HomePageProps & LinkStateProps;
 
 const Home: React.FC<Props> = ( { 
     selectedCategory,
@@ -98,27 +90,12 @@ const Home: React.FC<Props> = ( {
 
 interface LinkStateProps {
     selectedCategory: string,
-    joke: Joke
-}
-interface LinkDispatchProps {
-    startGetJoke: ( selected: string ) => void;
-    startGetCategoryList: () => void;
 }
 
 const mapStateToProps = ( state: AppState, ownProps: HomePageProps ): LinkStateProps => {
     return {
         selectedCategory: state.category.selected,
-        joke: state.joke
     }
 };
 
-const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>,
-    ownProps: HomePageProps 
-    ): LinkDispatchProps => ({
-        startGetJoke: bindActionCreators( getJoke, dispatch ),
-        startGetCategoryList: bindActionCreators( getCategoryList, dispatch )
-    });
-
-
-export default connect(mapStateToProps, mapDispatchToProps)( Home );
+export default connect( mapStateToProps )( Home );
