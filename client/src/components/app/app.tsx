@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 
 import Header from '../header/header';
 import Home from '../pages/home/home';
-import Test from '../pages/test/test';
 import client from '../../shared/apollo-client';
 import { store } from '../../store/store';
 
@@ -18,7 +17,6 @@ const App: React.FC = () => {
                     <Header />
                     <main>
                         <Switch>
-                            <Route path="/test"><Test /></Route>
                             <Route path="/" exact><Home /></Route>
                         </Switch>
                     </main>
