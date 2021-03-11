@@ -6,12 +6,8 @@ const GET_CATEGORIES = gql`
     }
 `
 
-
 export const useGetCategoryList = (): string[] => {
-    const { loading, error, data } = useQuery(GET_CATEGORIES);
+    const { data } = useQuery(GET_CATEGORIES);
 
     return data?.categories;
 }
-
-
-// export const useGetCategories = () => useQuery(GET_CATEGORIES);
