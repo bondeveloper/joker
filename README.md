@@ -17,14 +17,20 @@ This was built as a coding test to check my skill, mainly in the following tools
 
 
 #### Running the app
+The commands that you may need to use for this applications are ``` yarn dev ``` to run BOTH the client and then server on your local
 ##### Client
-The commands that you may need to use for this applications are
-``` yarn dev ``` to run both the client and then server on your local. Once you run this command, you can access the client from 
-```python
-http://localhost:3000```
+``` yarn client``` to run ONLY the client
+
+You can then access the client from 
+```javascript
+http://localhost:3000
+```
 
 ##### Server
-access the server from ```javascript
+``` yarn client``` to run ONLY the server
+
+You can then access the client from 
+```javascript
 http://localhost:9000/graghql
 ```
 use the folowing query to get
