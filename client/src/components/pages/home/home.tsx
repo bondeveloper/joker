@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
+import { bindActionCreators } from 'redux';
 import { NetworkStatus } from '@apollo/client';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -58,19 +58,19 @@ const Home: React.FC<Props> = ( {
         <div>
             <Jumbotron>
                 <div>
-                    <Button variant='link' href={ joke ?. url } target='_blank'>
+                    <Button variant='link' href={joke?.url} target='_blank'>
                         <Figure>
                             <Figure.Image
                                 width={171}
                                 height={180}
                                 alt='Joke Image'
-                                src={ joke ?. icon_url }
+                                src={joke?.icon_url}
                             />
                         </Figure>
                     </Button>
                 </div>
                 <p>
-                { joke ?.value }
+                {joke?.value}
                 </p>
             </Jumbotron>
             <Button variant='info' onClick={() => refetch()}> refetch! </Button>

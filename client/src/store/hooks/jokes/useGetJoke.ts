@@ -12,7 +12,7 @@ const GET_JOKE = gql`
 
 export const useGetJoke = ( category: string | null ): any => {
 
-    const filters = !category || category == '' || category == null ? undefined : {
+    const filters = !category || category === '' || category === null ? undefined : {
         variables: { category },
         notifyOnNetworkStatusChange: true,
     }
