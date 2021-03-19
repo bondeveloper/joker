@@ -27,7 +27,7 @@ http://localhost:3000
 ```
 
 ##### Server
-``` yarn client``` to run ONLY the server
+``` yarn server``` to run ONLY the server
 
 You can then access the client from 
 ```javascript
