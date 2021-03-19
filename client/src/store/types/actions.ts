@@ -6,5 +6,10 @@ export interface SetCategorySelectedAction {
     selected: string
 }
 
+export interface SetCategoryStateTypes {
+    selected: string
+}
+
 export type CategoryActionTypes = SetCategorySelectedAction;
+export type CategoryStateTypes = SetCategoryStateTypes;
 export type AppActions =  CategoryActionTypes;

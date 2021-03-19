@@ -1,4 +1,4 @@
-import { CategoryActionTypes } from '../types/actions';
+import { CategoryActionTypes, SET_CATEGORY_SELECTED, CategoryStateTypes } from '../types/actions';
 
 
 const initState = {
@@ -6,10 +6,14 @@ const initState = {
 };
 
 
-const reducer = ( state = initState, action: CategoryActionTypes ) : typeof initState => {
+const reducer = ( state: CategoryStateTypes, action: CategoryActionTypes ) : typeof initState => {
     switch ( action.type ) {
+        case SET_CATEGORY_SELECTED:
+            return {
+                selected: action.selected
+            }
         default:
-            return state;
+            return initState;
     };
 };
 

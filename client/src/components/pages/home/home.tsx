@@ -1,101 +1,41 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import { connect } from 'react-redux';
-import { NetworkStatus } from '@apollo/client';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Spinner from 'react-bootstrap/Spinner';
-import Figure from 'react-bootstrap/Figure';
 
 import CategoriesList from './category/list';
-import { AppState } from '../../../store/store';
-import { useGetCategoryList } from '../../../store/hooks/categories/useGetCategories';
-import { useGetJoke } from '../../../store/hooks/jokes/useGetJoke';
-
+import Joke from './joke/view';
 
 import './home.css';
 
 interface HomePageProps {}
 
 
-type Props = HomePageProps & LinkStateProps;
+type Props = HomePageProps;
 
-const Home: React.FC<Props> = ( { 
-    selectedCategory,
-    }) => {
+const Home: React.FC<Props> = () => {
 
-    const categories = useGetCategoryList();
-
-    const [ ct, setCt ] = useState( selectedCategory ); 
-
-    const { loading, error, data, refetch, networkStatus } = useGetJoke(ct);
-
-    let spinner, joke = null;
-
-    if ( ( networkStatus === NetworkStatus.refetch ) || loading || error ) {
-        spinner = ( ( networkStatus === NetworkStatus.refetch ) || loading )
-                    ? <Spinner animation='grow' variant='info' /> 
-                    : null;
-    } else {
-        joke = data?.joke;
-    }
+    const [ category, setCategory ] = useState("");
 
     const selectedCategoryHandler = ( dataFromChild: string )  => {
-        setCt( dataFromChild );
+       setCategory( dataFromChild );
     }
-
-    const display = joke ? (
-        <div>
-            <Jumbotron>
-                <div>
-                    <Button variant='link' href={joke?.url} target='_blank'>
-                        <Figure>
-                            <Figure.Image
-                                width={171}
-                                height={180}
-                                alt='Joke Image'
-                                src={joke?.icon_url}
-                            />
-                        </Figure>
-                    </Button>
-                </div>
-                <p>
-                {joke?.value}
-                </p>
-            </Jumbotron>
-            <Button variant='info' onClick={() => refetch()}> refetch! </Button>
-        </div>
-    ): spinner;
-
 
     return (
         <Container className='home'>
             <Row className='justify-content-md-center'>
                 <Col lg={3}>
-                    <CategoriesList 
-                        categories={categories} 
-                        category={selectedCategory} 
-                        selectedCategoryHandler={selectedCategoryHandler}
+                    <CategoriesList
+                        selectedCategoryHandler={ selectedCategoryHandler }
                     />
                 </Col>
-                <Col lg={6} className='display-joke'>                         
-                    { display }
+                <Col lg={6} className='display-joke'>
+                    <Joke category={category}/>                    
                 </Col>
             </Row> 
         </Container>
     )
 };
 
-interface LinkStateProps {
-    selectedCategory: string,
-}
-
-const mapStateToProps = ( state: AppState, ownProps: HomePageProps ): LinkStateProps => {
-    return {
-        selectedCategory: state.category.selected,
-    }
-};
-
-export default connect( mapStateToProps )( Home );
+export default Home;
