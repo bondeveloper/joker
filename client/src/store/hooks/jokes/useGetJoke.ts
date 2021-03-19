@@ -10,7 +10,7 @@ const GET_JOKE = gql`
     }
 `;
 
-export const useGetJoke = ( category: string | null ): any => {
+export const useGetJoke = ( category: string ): any => {
 
     const filters = !category || category === '' || category === null ? undefined : {
         variables: { category },
